@@ -59,15 +59,16 @@ const Home = () => {
   const [endPrice, setEndPrice] = useState(0);
   const [filterPrice, setFilterPrice] = useState(false);
 
-
   const handleChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(Number((event.target as HTMLInputElement).value));
   };
 
-  const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
     setPage(value);
   };
-
 
   const listTasks = () => {
     axios
@@ -80,43 +81,37 @@ const Home = () => {
   };
 
   function SwitchCase(props) {
-    switch(props.value) {
+    switch (props.value) {
       case 40:
-        return 'You are a Admin.';
-      case 'Manager':
-        return 'You are a Manager.';
+        return "You are a Admin.";
+      case "Manager":
+        return "You are a Manager.";
       default:
-        return 'You are a User';
+        return "You are a User";
     }
   }
 
   const filterPrice = () => {
     debugger;
-    if(price === 40){
+    if (price === 40) {
       setStartPrice(0);
       setEndPrice(price);
-    }
-    else if(price === 60){
+    } else if (price === 60) {
       setStartPrice(40);
       setEndPrice(price);
-    }
-    else if(price === 200){
+    } else if (price === 200) {
       setStartPrice(60);
       setEndPrice(price);
-    }
-    else if(price === 500){
+    } else if (price === 500) {
       setStartPrice(200);
       setEndPrice(price);
-    }
-    else if(price === 501){
+    } else if (price === 501) {
+      setStartPrice(0);
+      setEndPrice(price);
+    } else if (price === 200) {
       setStartPrice(0);
       setEndPrice(price);
     }
-    else if(price === 200){
-      setStartPrice(0);
-      setEndPrice(price);
-    }
-
   };
 
   useEffect(() => {
@@ -165,7 +160,7 @@ const Home = () => {
                 <RadioGroup
                   aria-label="Por preço"
                   value={price}
-                  onClick={()=> filterPrice()}
+                  onClick={() => filterPrice()}
                   onChange={(e) => handleChangePrice(e)}
                 >
                   <FormControlLabel
@@ -209,30 +204,26 @@ const Home = () => {
             {isMobile && <Divider sx={{ mb: "1rem" }} />}
 
             <Grid container spacing={5}>
-              {
-              
-              itens
-                .filter((card) => (card.priceMember >= startPrice && card.priceMember <= endPrice) )
-                .map((card) => (
-                  <Grid item key={card.id} xs={12} sm={6} md={4}>
-                    <CardCatalog
-                      image={card.image}
-                      name={card.name}
-                      price={card.price}
-                      discount={card.discount}
-                      priceMember={card.priceMember}
-                      priceNonMember={card.priceNonMember}
-                    ></CardCatalog>
-                    <Button
-                      onClick={() => navigate(`/productPage/${card.id}`)}
-                      sx={{ width: "100%", my: "1rem" }}
-                      color="success"
-                      variant="contained"
-                    >
-                      adicionar
-                    </Button>
-                  </Grid>
-                ))}
+              {itens.map((card) => (
+                <Grid item key={card.id} xs={12} sm={6} md={4}>
+                  <CardCatalog
+                    image={card.image}
+                    name={card.name}
+                    price={card.price}
+                    discount={card.discount}
+                    priceMember={card.priceMember}
+                    priceNonMember={card.priceNonMember}
+                  ></CardCatalog>
+                  <Button
+                    onClick={() => navigate(`/productPage/${card.id}`)}
+                    sx={{ width: "100%", my: "1rem" }}
+                    color="success"
+                    variant="contained"
+                  >
+                    adicionar
+                  </Button>
+                </Grid>
+              ))}
             </Grid>
             {!isMobile ? (
               <Pagination
