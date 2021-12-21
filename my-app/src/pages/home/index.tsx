@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -9,7 +10,6 @@ import {
   CssBaseline,
   Radio,
   Typography,
-  Box,
   Container,
   useTheme,
   useMediaQuery,
@@ -18,32 +18,12 @@ import {
   FormControl,
   FormControlLabel,
   Button,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
   Pagination,
   Divider,
 } from "@mui/material";
 import CardCatalog from "../../components/cardCatalog";
-
-interface IPropsCards {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  discount: number;
-  priceMember: number;
-  priceNonMember: number;
-  type: string;
-  classification: string;
-  size: string;
-  rating: number;
-  avaliations: number;
-  country: string;
-  region: string;
-  flag: string;
-  sommelierComment: string;
-}
+import { IPropsCards } from "../../interface/interface";
+// import { AppContext } from "../../context/context";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -55,9 +35,31 @@ const Home = () => {
   const [itemsPerPage, setItemsPerPage] = useState(0);
   const [page, setPage] = useState(1);
   const [price, setPrice] = useState(0);
-  const [startPrice, setStartPrice] = useState(0);
-  const [endPrice, setEndPrice] = useState(0);
-  const [filterPrice, setFilterPrice] = useState(false);
+  // const [startPrice, setStartPrice] = useState(0);
+  // const [endPrice, setEndPrice] = useState(0);
+  // const [filterPrice, setFilterPrice] = useState(false);
+  // const { dispatch } = useContext(AppContext);
+
+  // const addProduct = (item: {
+  //   id: number;
+  //   image: string;
+  //   name: string;
+  //   price: number;
+  //   discount: number;
+  //   priceMember: number;
+  //   priceNonMember: number;
+  //   type: string;
+  //   classification: string;
+  //   size: string;
+  //   rating: number;
+  //   avaliations: number;
+  //   country: string;
+  //   region: string;
+  //   flag: string;
+  //   sommelierComment: string;
+  // }) => {
+  //   dispatch({ type: "ADD_PRODUCT", payload: item });
+  // };
 
   const handleChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(Number((event.target as HTMLInputElement).value));
@@ -80,39 +82,39 @@ const Home = () => {
       });
   };
 
-  function SwitchCase(props) {
-    switch (props.value) {
-      case 40:
-        return "You are a Admin.";
-      case "Manager":
-        return "You are a Manager.";
-      default:
-        return "You are a User";
-    }
-  }
+  // function SwitchCase(props) {
+  //   switch (props.value) {
+  //     case 40:
+  //       return "You are a Admin.";
+  //     case "Manager":
+  //       return "You are a Manager.";
+  //     default:
+  //       return "You are a User";
+  //   }
+  // }
 
-  const filterPrice = () => {
-    debugger;
-    if (price === 40) {
-      setStartPrice(0);
-      setEndPrice(price);
-    } else if (price === 60) {
-      setStartPrice(40);
-      setEndPrice(price);
-    } else if (price === 200) {
-      setStartPrice(60);
-      setEndPrice(price);
-    } else if (price === 500) {
-      setStartPrice(200);
-      setEndPrice(price);
-    } else if (price === 501) {
-      setStartPrice(0);
-      setEndPrice(price);
-    } else if (price === 200) {
-      setStartPrice(0);
-      setEndPrice(price);
-    }
-  };
+  // const filterPrice = () => {
+  //   debugger;
+  //   if (price === 40) {
+  //     setStartPrice(0);
+  //     setEndPrice(price);
+  //   } else if (price === 60) {
+  //     setStartPrice(40);
+  //     setEndPrice(price);
+  //   } else if (price === 200) {
+  //     setStartPrice(60);
+  //     setEndPrice(price);
+  //   } else if (price === 500) {
+  //     setStartPrice(200);
+  //     setEndPrice(price);
+  //   } else if (price === 501) {
+  //     setStartPrice(0);
+  //     setEndPrice(price);
+  //   } else if (price === 200) {
+  //     setStartPrice(0);
+  //     setEndPrice(price);
+  //   }
+  // };
 
   useEffect(() => {
     listTasks();
@@ -160,7 +162,7 @@ const Home = () => {
                 <RadioGroup
                   aria-label="Por preço"
                   value={price}
-                  onClick={() => filterPrice()}
+                  // onClick={() => filterPrice()}
                   onChange={(e) => handleChangePrice(e)}
                 >
                   <FormControlLabel
@@ -205,7 +207,14 @@ const Home = () => {
 
             <Grid container spacing={5}>
               {itens.map((card) => (
-                <Grid item key={card.id} xs={12} sm={6} md={4}>
+                <Grid
+                  item
+                  key={card.id}
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  onClick={() => navigate(`/productPage/${card.id}`)}
+                >
                   <CardCatalog
                     image={card.image}
                     name={card.name}
@@ -213,15 +222,8 @@ const Home = () => {
                     discount={card.discount}
                     priceMember={card.priceMember}
                     priceNonMember={card.priceNonMember}
+                    addProduct={() => navigate(`/productPage/${card.id}`)}
                   ></CardCatalog>
-                  <Button
-                    onClick={() => navigate(`/productPage/${card.id}`)}
-                    sx={{ width: "100%", my: "1rem" }}
-                    color="success"
-                    variant="contained"
-                  >
-                    adicionar
-                  </Button>
                 </Grid>
               ))}
             </Grid>

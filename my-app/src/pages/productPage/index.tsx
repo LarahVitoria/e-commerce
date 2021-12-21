@@ -1,34 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
-import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../../components/navbar";
 import { Container } from "@mui/material";
 import { useParams } from "react-router-dom";
 import DescProduct from "../../components/descriptionProduct";
-
-interface IPropsCards {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  discount: number;
-  priceMember: number;
-  priceNonMember: number;
-  type: string;
-  classification: string;
-  size: string;
-  rating: number;
-  avaliations: number;
-  country: string;
-  region: string;
-  flag: string;
-  sommelierComment: string;
-}
+import { IPropsCards } from "../../interface/interface";
 
 const ProductPage = () => {
   const { idProduct } = useParams();
   const [cards, setCards] = useState<IPropsCards[]>([]);
+
   const listTasks = () => {
     axios
       .get(`https://wine-back-test.herokuapp.com/products`)

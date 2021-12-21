@@ -1,14 +1,15 @@
-import { BrowserRouter as Router, Routes as Switch, Route, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Routes as Switch, Route } from "react-router-dom";
 import Home from "../pages/home/index";
 import ProductPage from "../pages/productPage";
+import Cart from "../pages/cartPage";
 
 function Routes() {
-  let  { idProduct }  =  useParams ( ) ; 
   return (
     <Router>
       <Switch>
         <Route path="/" element={<Home />} />
         <Route path="/productPage/:idProduct" element={<ProductPage />} />
+        <Route path="/cart" element={<Cart />} />
       </Switch>
     </Router>
   );

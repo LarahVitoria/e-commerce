@@ -11,9 +11,6 @@ const theme = createTheme({
     },
     secondary: {
       main: "#fff",
-    },
-    tercious: {
-      main: "#fff",
     }
   },
 });

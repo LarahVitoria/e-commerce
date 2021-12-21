@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import {
   AiOutlineLeft,
   AiOutlineMinusCircle,
@@ -13,7 +14,6 @@ import {
   Grid,
   useTheme,
   useMediaQuery,
-  Badge,
   IconButton,
   AppBar,
   Toolbar,
@@ -30,7 +30,6 @@ import {
   Summary,
   ContainerDescription,
   ContainerButton,
-  ContainerButtonMb,
   Price,
   Discount,
 } from "./style";
